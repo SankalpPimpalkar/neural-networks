@@ -4,28 +4,79 @@ from dd import dd
 from value import Value
 from equations import parabola
 
-xs = np.arange(-5, 5, 0.25)
-ys = parabola(xs, 3, 4, 5)
-
-for x, y in zip(xs, ys):
-    # print(f"X: {x}, Y: {y}")
-    pass
-
-
 h = 0.000001
 x = 3
-# print((parabola(x + h) - parabola(x)) / h)
-# plt.plot(xs, ys)
 
-a = Value(3, label='a')
-b = Value(4, label='b')
-c = Value(5, label='c')
+# a = Value(2, label='a')
+# a.grad = -2 * -3
 
-d = a * b
-d.label = 'd'
+# b = Value(-3, label='b')
+# b.grad = -2 * 2
 
-e = d + c
-e.label = 'e'
-e.grad = 1
+# e = a * b
+# e.label = "e"
+# e.grad = -2
 
-dd(e).render("draw")
+# c = Value(10, label='c') 
+# c.grad = -2 
+
+# d = e + c
+# d.label = "d"
+# d.grad = -2
+
+# f = Value(-2, label='f')
+# f.grad = 4
+
+# L = d * f
+# L.label = "L"
+# L.grad = 1
+
+x1 = Value(2.0, label='x1')
+x2 = Value(0.0, label='x2')
+
+w1 = Value(-3.0, label='w1')
+w2 = Value(1.0, label='w2')
+
+b = Value(6.881, label='b')
+
+x1w1 = x1 * w1
+x1w1.label = "x1w1"
+
+x2w2 = x2 * w2
+x2w2.label = "x2w2"
+
+x1w1_add_x2w2 = x1w1 + x2w2
+x1w1_add_x2w2.label = "x1w1 + x2w2"
+
+n = x1w1_add_x2w2 + b
+n.label = "n"
+
+out = n.tanh()
+out.label = "O"
+
+out.backward()
+
+# out._backward()
+# n._backward()
+# b._backward()
+# x1w1_add_x2w2._backward()
+# x1w1._backward()
+# x2w2._backward()
+
+
+
+# n.grad = 1 - out.data**2
+
+# x1w1_add_x2w2.grad = n.grad
+# b.grad = n.grad
+
+# x1w1.grad = x1w1_add_x2w2.grad
+# x2w2.grad = x1w1_add_x2w2.grad
+
+# x1.grad = w1.data * x1w1.grad
+# w1.grad = x1.data * x1w1.grad
+
+# x2.grad = w2.data * x2w2.grad
+# w2.grad = x2.data * x2w2.grad
+
+dd(out).render("draw")
