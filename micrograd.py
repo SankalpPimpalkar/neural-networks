@@ -34,6 +34,8 @@ x = 3
 x1 = Value(2.0, label='x1')
 x2 = Value(0.0, label='x2')
 
+x1 = 1 + x1
+
 w1 = Value(-3.0, label='w1')
 w2 = Value(1.0, label='w2')
 
@@ -56,27 +58,9 @@ out.label = "O"
 
 out.backward()
 
-# out._backward()
-# n._backward()
-# b._backward()
-# x1w1_add_x2w2._backward()
-# x1w1._backward()
-# x2w2._backward()
+# dd(out).render("draw")
 
-
-
-# n.grad = 1 - out.data**2
-
-# x1w1_add_x2w2.grad = n.grad
-# b.grad = n.grad
-
-# x1w1.grad = x1w1_add_x2w2.grad
-# x2w2.grad = x1w1_add_x2w2.grad
-
-# x1.grad = w1.data * x1w1.grad
-# w1.grad = x1.data * x1w1.grad
-
-# x2.grad = w2.data * x2w2.grad
-# w2.grad = x2.data * x2w2.grad
-
-dd(out).render("draw")
+a = Value(2, label='a')
+print(a)
+b = a.exp() ; b.label = 'b'
+print(b)
