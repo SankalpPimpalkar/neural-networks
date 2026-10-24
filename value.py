@@ -10,9 +10,6 @@ class Value:
         self.label = label
         self.grad = 0.0
 
-    def __repr__(self):
-        return f"Value(data={self.data})"
-
     def __add__(self, other: Value):
         other = other if isinstance(other, Value) else Value(other)
         out = Value(self.data + other.data, (self, other), '+')
@@ -25,6 +22,12 @@ class Value:
 
     def __radd__(self, other):
         return self + other
+
+    def __neg__(self):
+        return self * -1
+
+    def __sub__(self, other):
+        return self + (-other)
     
     def __mul__(self, other: Value):
         other = other if isinstance(other, Value) else Value(other)
@@ -43,7 +46,7 @@ class Value:
         assert isinstance(other, (int, float))
         out = Value(self.data**other, (self,), f'**{other}')
         def _backward():
-            self.grad += other * (out.data ** (other - 1)) * out.grad
+            self.grad += other * (self.data ** (other - 1)) * out.grad
         out._backward = _backward 
         return out 
 
@@ -83,3 +86,6 @@ class Value:
         self.grad = 1.0
         for node in reversed(topo):
             node._backward()
+
+    def __repr__(self):
+        return f"Value(data={self.data})"

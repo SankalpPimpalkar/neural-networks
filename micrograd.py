@@ -34,8 +34,6 @@ x = 3
 x1 = Value(2.0, label='x1')
 x2 = Value(0.0, label='x2')
 
-x1 = 1 + x1
-
 w1 = Value(-3.0, label='w1')
 w2 = Value(1.0, label='w2')
 
@@ -53,14 +51,11 @@ x1w1_add_x2w2.label = "x1w1 + x2w2"
 n = x1w1_add_x2w2 + b
 n.label = "n"
 
-out = n.tanh()
+e = (2*n).exp()
+
+out = (e - 1) / (e + 1)
 out.label = "O"
 
 out.backward()
 
-# dd(out).render("draw")
-
-a = Value(2, label='a')
-print(a)
-b = a.exp() ; b.label = 'b'
-print(b)
+dd(out).render("draw")
