@@ -203,6 +203,10 @@ Visualizes computational DAGs using [Graphviz](https://graphviz.org/):
 - **`dd(root)`**: Builds a Graphviz `Digraph` with nodes rendered with record shapes `{ label | data %.4f | grad %.4f }` and distinct operation nodes (`+`, `*`, `**-1`, `exp`, etc.).
 - **`draw(root, path="draw")`**: Helper function that directly renders the computation graph to an SVG file (`draw.svg`).
 
+#### Computation Graph Preview (`draw.svg`)
+
+![Computation Graph Preview](./draw.svg)
+
 ---
 
 ### 6. Vectorized Feedforward Baseline (`nn.py`)

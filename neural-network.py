@@ -53,7 +53,7 @@ xs = [
     [1.0, 1.0, -1.0]
 ]
 ys = [1.0, -1.0, -1.0, 1.0]
-n = MLP(3, [4,4,1])
+n = MLP(3, [100,100,1])
 
 ypred = [n(x) for x in xs]
 loss = sum([(yc - yd)**2 for yc, yd in zip(ypred, ys)])
